@@ -3,6 +3,7 @@ package com.example.fiscalia.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="cities")
 public class City {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="CITY_ID")
@@ -30,16 +34,23 @@ public class City {
 	private String cityName;
 	@Column(name ="STATUS")
 	private String status;
+	
+	
+	
 
-
+	@JsonIgnore()
 	@OneToMany(mappedBy = "cityId")
 	private Set<Company> company = new HashSet<Company>();
 	
+	@JsonIgnore()
 	@OneToMany(mappedBy = "cityId")
 	private Set<Contact> contact = new HashSet<Contact>();
 	
+	@JsonIgnore()
 	@OneToMany(mappedBy = "cityId")
 	private Set<Court> court = new HashSet<Court>();
+	
+	@JsonIgnore()
 	@OneToMany(mappedBy = "cityId")
 	private Set<Employee> employee = new HashSet<Employee>();
 	

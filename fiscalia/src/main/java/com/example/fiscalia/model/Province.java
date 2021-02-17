@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="provinces")
@@ -30,7 +32,8 @@ public class Province {
 	private String provinceName;
 	@Column(name ="STATUS")
 	private String status;
-
+	
+	@JsonIgnore()
 	@OneToMany(mappedBy = "province")
 	private Set<City> users = new HashSet<City>();
 	
